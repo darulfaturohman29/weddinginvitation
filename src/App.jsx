@@ -16,14 +16,14 @@ const DATA = {
   groom: {
     name: "Darul",
     fullName: "Darul Faturohman, S.T.",
-    photo: "/pria.jpg",
+    photo: import.meta.env.BASE_URL + "pria.jpg",
     parents: "Putra ke-4 dari Bapak H. Mamad S & Ibu Hj. Oon",
     ig: "https://instagram.com/",
   },
   bride: {
     name: "Dilla",
     fullName: "Zuhirna Wulan Dilla, S.I.Kom.",
-    photo: "/wanita.jpg",
+    photo: import.meta.env.BASE_URL + "wanita.jpg",
     parents: "Putri ke-1 dari Bapak Irly Alex & Ibu Nurdina",
     ig: "https://instagram.com/",
   },
@@ -60,12 +60,12 @@ const DATA = {
   ],
 
   gallery: [
-    "/prewedding-1.jpg",
-    "/prewedding-2.jpg",
-    "/prewedding-3.jpg",
-    "/prewedding-4.jpg",
-    "/prewedding-5.jpg",
-    "/prewedding-6.jpg",
+    import.meta.env.BASE_URL + "prewedding-1.jpg",
+    import.meta.env.BASE_URL + "prewedding-2.jpg",
+    import.meta.env.BASE_URL + "prewedding-3.jpg",
+    import.meta.env.BASE_URL + "prewedding-4.jpg",
+    import.meta.env.BASE_URL + "prewedding-5.jpg",
+    import.meta.env.BASE_URL + "prewedding-6.jpg",
   ],
 
   events: [
@@ -79,14 +79,14 @@ const DATA = {
     },
   ],
 
-  music: "/musik.mp3", // taruh file musik di public/ (yang kamu punya haknya / bebas royalti)
+  music: import.meta.env.BASE_URL + "musik.mp3", // taruh file musik di public/ (yang kamu punya haknya / bebas royalti)
   rsvpEndpoint: "", // tempel URL Apps Script di sini (lihat backend-rsvp/CARA-PASANG.md)
   waNumber: "62812345678", // dipakai sebagai cadangan bila endpoint belum diisi
 
-  video: "/video.mp4",
-  frameFlower: "/bunga-frame.png",
-  cornerRight: "/bunga-sudut-kanan.png",
-  cornerLeft: "/bunga-sudut-kiri.png",
+  video: import.meta.env.BASE_URL + "video.mp4",
+  frameFlower: import.meta.env.BASE_URL + "bunga-frame.png",
+  cornerRight: import.meta.env.BASE_URL + "bunga-sudut-kanan.png",
+  cornerLeft: import.meta.env.BASE_URL + "bunga-sudut-kiri.png",
 };
 
 const EASE = [0.22, 1, 0.36, 1];
