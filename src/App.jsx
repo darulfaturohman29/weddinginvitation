@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { text } from "framer-motion/client";
 
 /* ============================================================
    DATA UNDANGAN — ubah di sini saja
