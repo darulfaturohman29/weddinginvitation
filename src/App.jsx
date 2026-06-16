@@ -59,12 +59,26 @@ const DATA = {
   ],
 
   gallery: [
-    import.meta.env.BASE_URL + "prewedding-1.jpg",
-    import.meta.env.BASE_URL + "prewedding-2.jpg",
-    import.meta.env.BASE_URL + "prewedding-3.jpg",
-    import.meta.env.BASE_URL + "prewedding-4.jpg",
-    import.meta.env.BASE_URL + "prewedding-5.jpg",
-    import.meta.env.BASE_URL + "prewedding-6.jpg",
+    import.meta.env.BASE_URL + "prewedding-1.png",
+    import.meta.env.BASE_URL + "prewedding-2.png",
+    import.meta.env.BASE_URL + "prewedding-3.png",
+    import.meta.env.BASE_URL + "prewedding-4.png",
+    import.meta.env.BASE_URL + "prewedding-5.png",
+    import.meta.env.BASE_URL + "prewedding-6.png",
+    import.meta.env.BASE_URL + "prewedding-7.png",
+    import.meta.env.BASE_URL + "prewedding-8.png",
+    import.meta.env.BASE_URL + "prewedding-9.png",
+    import.meta.env.BASE_URL + "prewedding-10.png",
+    import.meta.env.BASE_URL + "prewedding-11.png",
+    import.meta.env.BASE_URL + "prewedding-12.png",
+    import.meta.env.BASE_URL + "prewedding-13.png",
+    import.meta.env.BASE_URL + "prewedding-14.png",
+    import.meta.env.BASE_URL + "prewedding-15.png",
+    import.meta.env.BASE_URL + "prewedding-16.png",
+    import.meta.env.BASE_URL + "prewedding-17.png",
+    import.meta.env.BASE_URL + "prewedding-18.png",
+    import.meta.env.BASE_URL + "prewedding-19.png",
+    import.meta.env.BASE_URL + "prewedding-20.png",
   ],
 
   events: [
@@ -78,9 +92,22 @@ const DATA = {
     },
   ],
 
-  music: import.meta.env.BASE_URL + "musik.mp3", // taruh file musik di public/ (yang kamu punya haknya / bebas royalti)
-  rsvpEndpoint: "", // tempel URL Apps Script di sini (lihat backend-rsvp/CARA-PASANG.md)
-  waNumber: "62812345678", // dipakai sebagai cadangan bila endpoint belum diisi
+  music: import.meta.env.BASE_URL + "musik.mp3",
+
+  bankAccounts: [
+    {
+      name: DATA.bride.fullName,
+      bank: "BCA",
+      norek: "1234567890",
+      atas_nama: "Zuhirna Wulan Dilla",
+    },
+    {
+      name: DATA.groom.fullName,
+      bank: "Mandiri",
+      norek: "9876543210",
+      atas_nama: "Darul Faturohman",
+    },
+  ],
 
   video: import.meta.env.BASE_URL + "video.mp4",
   frameFlower: import.meta.env.BASE_URL + "bunga-frame.png",
@@ -241,148 +268,85 @@ function Cover({ onOpen, guest, coupleName, dateText }) {
   );
 }
 
-/* ---------- form RSVP (kirim ke Google Sheet) ---------- */
-function RSVPForm({ endpoint, waNumber, coupleName }) {
-  const [form, setForm] = useState({
-    nama: "",
-    kehadiran: "Hadir",
-    jumlah: 1,
-    pesan: "",
-  });
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
-  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+/* ---------- form ucapan selamat ---------- */
+function CongratulationsForm() {
+  const [form, setForm] = useState({ nama: "", ucapan: "" });
+  const [greetings, setGreetings] = useState([]);
+  const [status, setStatus] = useState("idle");
 
-  const submit = async () => {
-    if (!form.nama.trim()) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.nama.trim() || !form.ucapan.trim()) {
       setStatus("validasi");
       return;
     }
-    setStatus("submitting");
-    try {
-      const body = new FormData();
-      Object.entries(form).forEach(([k, v]) => body.append(k, String(v)));
-      // 'no-cors': baris tetap tertulis ke Sheet; respons tidak terbaca → sukses optimistis
-      await fetch(endpoint, { method: "POST", mode: "no-cors", body });
-      setStatus("success");
-    } catch {
-      setStatus("error");
-    }
+    setGreetings([...greetings, { ...form, id: Date.now() }]);
+    setForm({ nama: "", ucapan: "" });
+    setStatus("success");
+    setTimeout(() => setStatus("idle"), 2000);
   };
 
-  if (!endpoint) {
-    const wa = `https://wa.me/${waNumber}?text=${encodeURIComponent(
-      `Halo, saya konfirmasi kehadiran untuk pernikahan ${coupleName}.`
-    )}`;
-    return (
-      <div className="text-center">
-        <p className="text-[1.05rem] font-bold">
-          Form database belum diaktifkan. Isi{" "}
-          <code className="text-rose">rsvpEndpoint</code> di{" "}
-          <code className="text-rose">DATA</code> (lihat{" "}
-          <em>backend-rsvp/CARA-PASANG.md</em>). Sementara ini gunakan WhatsApp:
-        </p>
-        <a
-          href={wa}
-          target="_blank"
-          rel="noopener"
-          className="inline-block mt-4 font-sc tracking-[0.2em] uppercase text-[0.76rem] text-navy border border-rose px-7 py-3 transition-all hover:bg-rose hover:text-white hover:shadow-md">
-          Konfirmasi via WhatsApp
-        </a>
-      </div>
-    );
-  }
-
-  if (status === "success") {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: EASE }}
-        className="text-center">
-        <div className="font-script text-navy text-[2.4rem]">Terima kasih</div>
-        <p className="text-[1.08rem] font-bold mt-2">
-          Konfirmasimu sudah kami terima. Sampai jumpa di hari bahagia kami.
-        </p>
-      </motion.div>
-    );
-  }
-
-  const inputCls =
-    "w-full bg-white/70 border border-softpink/50 px-4 py-2.5 text-ink outline-none focus:border-rose transition-colors focus:shadow-md";
   return (
-    <div className="text-left max-w-[440px] mx-auto">
-      <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mb-1">
-        Nama
-      </label>
-      <input
-        className={inputCls}
-        value={form.nama}
-        onChange={(e) => set("nama", e.target.value)}
-        placeholder="Nama lengkap"
-      />
+    <div className="w-full">
+      <form
+        onSubmit={handleSubmit}
+        className="text-left max-w-[440px] mx-auto mb-10">
+        <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mb-1">
+          Nama Anda
+        </label>
+        <input
+          type="text"
+          className="w-full bg-white/70 border border-softpink/50 px-4 py-2.5 text-ink outline-none focus:border-rose transition-colors focus:shadow-md"
+          value={form.nama}
+          onChange={(e) => setForm({ ...form, nama: e.target.value })}
+          placeholder="Masukkan nama"
+        />
 
-      <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mt-4 mb-1">
-        Kehadiran
-      </label>
-      <div className="flex gap-3">
-        {["Hadir", "Tidak Hadir"].map((opt) => (
-          <button
-            key={opt}
-            onClick={() => set("kehadiran", opt)}
-            className={`flex-1 py-2.5 border text-[0.95rem] transition-all ${
-              form.kehadiran === opt
-                ? "bg-rose text-white border-rose shadow-md"
-                : "border-softpink/50 text-ink hover:border-rose hover:shadow-sm"
-            }`}>
-            {opt}
-          </button>
-        ))}
-      </div>
+        <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mt-4 mb-1">
+          Ucapan Selamat
+        </label>
+        <textarea
+          rows="4"
+          className="w-full bg-white/70 border border-softpink/50 px-4 py-2.5 text-ink outline-none focus:border-rose transition-colors focus:shadow-md"
+          value={form.ucapan}
+          onChange={(e) => setForm({ ...form, ucapan: e.target.value })}
+          placeholder="Tulis ucapan selamat untuk kedua mempelai..."
+        />
 
-      {form.kehadiran === "Hadir" && (
-        <>
-          <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mt-4 mb-1">
-            Jumlah Tamu
-          </label>
-          <input
-            type="number"
-            min="1"
-            max="10"
-            className={inputCls}
-            value={form.jumlah}
-            onChange={(e) => set("jumlah", e.target.value)}
-          />
-        </>
+        {status === "validasi" && (
+          <p className="text-navy text-sm mt-2">
+            Mohon isi nama dan ucapan terlebih dahulu.
+          </p>
+        )}
+
+        <button
+          type="submit"
+          className="w-full mt-5 font-sc tracking-[0.2em] uppercase text-[0.78rem] text-white bg-rosedeep py-3 transition-all hover:opacity-90 hover:shadow-md">
+          {status === "success" ? "✓ Terima kasih!" : "Kirim Ucapan"}
+        </button>
+      </form>
+
+      {greetings.length > 0 && (
+        <div className="max-w-[640px] mx-auto">
+          <h4 className="font-sc tracking-[0.2em] uppercase text-[0.78rem] text-maroon mb-4 text-center">
+            Ucapan Selamat dari Tamu
+          </h4>
+          <div className="space-y-3">
+            {greetings.map((g) => (
+              <motion.div
+                key={g.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="border border-softpink/50 bg-white/60 backdrop-blur-sm px-5 py-4 rounded">
+                <p className="font-bold text-navy text-[1rem]">{g.nama}</p>
+                <p className="text-[1.05rem] font-semibold text-ink mt-2 italic">
+                  "{g.ucapan}"
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       )}
-
-      <label className="block font-sc tracking-[0.16em] uppercase text-[0.7rem] text-rose mt-4 mb-1">
-        Ucapan & Doa
-      </label>
-      <textarea
-        rows="3"
-        className={inputCls}
-        value={form.pesan}
-        onChange={(e) => set("pesan", e.target.value)}
-        placeholder="Tulis ucapan untuk kedua mempelai"
-      />
-
-      {status === "validasi" && (
-        <p className="text-navy text-sm mt-2">
-          Mohon isi nama terlebih dahulu.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="text-navy text-sm mt-2">
-          Terjadi kesalahan. Coba lagi sebentar.
-        </p>
-      )}
-
-      <button
-        onClick={submit}
-        disabled={status === "submitting"}
-        className="w-full mt-5 font-sc tracking-[0.2em] uppercase text-[0.78rem] text-white bg-rosedeep py-3 transition-all hover:opacity-90 hover:shadow-md disabled:opacity-60">
-        {status === "submitting" ? "Mengirim..." : "Kirim Konfirmasi"}
-      </button>
     </div>
   );
 }
@@ -962,24 +926,67 @@ export default function App() {
         </div>
       </section>
 
-      {/* RSVP */}
+      {/* TANDA KASIH */}
       <section className="relative min-h-screen flex items-center justify-center text-center px-6 py-24">
-        <div className="relative z-10 w-full max-w-[560px]">
+        <div className="relative z-10 w-full max-w-[860px]">
           <Reveal>
-            <Eyebrow>Konfirmasi Kehadiran</Eyebrow>
-            <SectionTitle>RSVP</SectionTitle>
+            <Eyebrow>Apresiasi untuk Tamu</Eyebrow>
+            <SectionTitle>Tanda Kasih</SectionTitle>
+            <Divider />
+          </Reveal>
+
+          {/* NOMOR REKENING */}
+          <Reveal delay={0.15}>
+            <p className="text-[1.05rem] font-bold mb-8">
+              Doa dan restu Anda adalah hadiah terbesar. Jika ingin memberikan
+              hadiah, berikut rekening kedua mempelai:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              {DATA.bankAccounts.map((acc, i) => (
+                <motion.div
+                  key={acc.bank}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="border border-maroon/60 bg-white/70 backdrop-blur-sm px-6 py-7 shadow-lg hover:shadow-xl transition-all">
+                  <span className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-softpink via-rose to-blush" />
+                  <p className="font-sc tracking-[0.2em] uppercase text-[0.7rem] text-rose mb-2">
+                    {acc.name === DATA.bride.fullName
+                      ? "Mempelai Wanita"
+                      : "Mempelai Pria"}
+                  </p>
+                  <p className="font-bold text-[1.2rem] text-navy mb-4">
+                    {acc.atas_nama}
+                  </p>
+                  <div className="bg-navy/5 px-4 py-3 rounded mb-3">
+                    <p className="font-sc tracking-[0.1em] text-[0.75rem] text-navy mb-1">
+                      Bank
+                    </p>
+                    <p className="font-bold text-[1.1rem] text-navy">
+                      {acc.bank}
+                    </p>
+                  </div>
+                  <div className="bg-navy/5 px-4 py-3 rounded">
+                    <p className="font-sc tracking-[0.1em] text-[0.75rem] text-navy mb-1">
+                      Nomor Rekening
+                    </p>
+                    <p className="font-mono font-bold text-[1.1rem] text-navy tracking-widest">
+                      {acc.norek}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* FORM UCAPAN */}
+          <Reveal delay={0.3}>
             <Divider />
             <p className="text-[1.05rem] font-bold mb-6">
-              Mohon konfirmasi kehadiran Anda untuk membantu kami mempersiapkan
-              acara.
+              Kirimkan ucapan selamat Anda untuk kedua mempelai
             </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <RSVPForm
-              endpoint={DATA.rsvpEndpoint}
-              waNumber={DATA.waNumber}
-              coupleName={coupleName}
-            />
+            <CongratulationsForm />
           </Reveal>
         </div>
       </section>
