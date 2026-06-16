@@ -1,0 +1,25 @@
+Taruh semua aset di folder ini, dengan nama PERSIS seperti di bawah:
+
+MUSIK
+  - musik.mp3                (musik latar, MP3, bebas royalti / hak milikmu, < 3MB)
+
+VIDEO & BUNGA
+  - video.mp4               (video latar, terang/lembut, < 5MB)
+  - bunga-frame.png         (bunga pembingkai nama, PNG transparan)
+  - bunga-sudut-kanan.png   (bunga pojok kanan-atas)
+  - bunga-sudut-kiri.png    (versi flip horizontal, pojok kiri-bawah)
+
+FOTO MEMPELAI (potret, rasio 3:4 paling pas)
+  - wanita.jpg              (foto mempelai wanita)
+  - pria.jpg                (foto mempelai pria)
+
+GALERI PREWEDDING (boleh tambah/kurang di array gallery pada App.jsx)
+  - prewedding-1.jpg
+  - prewedding-2.jpg
+  - prewedding-3.jpg
+  - prewedding-4.jpg
+  - prewedding-5.jpg
+  - prewedding-6.jpg
+
+Catatan: foto/aset yang belum ada otomatis disembunyikan; foto mempelai
+yang kosong diganti inisial nama. Layout tetap rapi.

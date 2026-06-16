@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview Undangan Digital Estetik</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Pinyon+Script&display=swap"
+      rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          #f9f5f0 0%,
+          #ffffff 50%,
+          #f0dce4 100%
+        );
+        background-attachment: fixed;
+        font-family: "Cormorant Garamond", serif;
+        color: #4a4045;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* ============ HERO SECTION ============ */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 30px;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(720px, 96vw);
+        height: min(720px, 96vw);
+        background: radial-gradient(
+          circle,
+          rgba(232, 208, 217, 0.3) 0%,
+          rgba(224, 185, 198, 0.2) 40%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .eyebrow {
+        font-family: "Cormorant SC", serif;
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        color: #d4a5af;
+        margin-bottom: 20px;
+      }
+
+      .bride-name,
+      .groom-name {
+        font-family: "Pinyon Script", cursive;
+        color: #3d4a5f;
+        font-size: clamp(2.5rem, 10vw, 4.5rem);
+        line-height: 1;
+        margin: 10px 0;
+      }
+
+      .ampersand {
+        font-family: "Pinyon Script", cursive;
+        color: #e8d0d9;
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        margin: 15px 0;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+      }
+
+      .divider-line {
+        height: 1px;
+        width: 50px;
+        background: linear-gradient(to right, transparent, #f0dce4);
+      }
+
+      .divider-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d4a5af;
+      }
+
+      .date-text {
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: #3d4a5f;
+      }
+
+      /* ============ COLOR PALETTE SECTION ============ */
+      .section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 30px;
+        background: rgba(255, 255, 255, 0.5);
+        margin: 40px 0;
+        border-radius: 20px;
+      }
+
+      .section-title {
+        font-family: "Cormorant SC", serif;
+        font-size: 2.5rem;
+        color: #3d4a5f;
+        margin-bottom: 60px;
+        text-align: center;
+      }
+
+      .color-palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .color-item {
+        text-align: center;
+        animation: slideUp 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .color-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .color-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .color-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .color-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .color-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .color-item:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+      .color-item:nth-child(7) {
+        animation-delay: 0.7s;
+      }
+      .color-item:nth-child(8) {
+        animation-delay: 0.8s;
+      }
+
+      .color-box {
+        width: 100%;
+        height: 200px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 8px 24px rgba(192, 141, 152, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .color-box:hover {
+        transform: translateY(-8px);
+      }
+
+      .color-name {
+        font-family: "Cormorant SC", serif;
+        font-size: 1.1rem;
+        color: #3d4a5f;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .color-code {
+        font-family: monospace;
+        font-size: 0.9rem;
+        color: #c08d98;
+      }
+
+      /* ============ FLOWERS SECTION ============ */
+      .flowers-section {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 80px 30px;
+      }
+
+      .flower-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .flower-item {
+        text-align: center;
+        animation: fadeIn 1s ease-out forwards;
+        opacity: 0;
+      }
+
+      .flower-item:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .flower-item:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      .flower-item:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      .flower-visual {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(240, 220, 228, 0.3),
+          rgba(224, 185, 198, 0.2)
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 40px rgba(224, 185, 198, 0.25);
+      }
+
+      .flower-title {
+        font-family: "Cormorant SC", serif;
+        font-size: 1.5rem;
+        color: #3d4a5f;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
+
+      .flower-desc {
+        font-size: 1rem;
+        color: #7a8f74;
+        line-height: 1.6;
+      }
+
+      /* ============ FEATURES SECTION ============ */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 40px 30px;
+        border-radius: 15px;
+        border-top: 3px solid #f0dce4;
+        box-shadow: 0 8px 24px rgba(224, 185, 198, 0.15);
+        transition: all 0.3s ease;
+        animation: slideUp 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(224, 185, 198, 0.25);
+      }
+
+      .feature-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .feature-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .feature-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .feature-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .feature-card:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .feature-card:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+      }
+
+      .feature-title {
+        font-family: "Cormorant SC", serif;
+        font-size: 1.3rem;
+        color: #3d4a5f;
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .feature-text {
+        font-size: 0.95rem;
+        color: #7a8f74;
+        line-height: 1.6;
+      }
+
+      /* ============ CTA SECTION ============ */
+      .cta {
+        background: linear-gradient(
+          135deg,
+          rgba(224, 185, 198, 0.4),
+          rgba(232, 208, 217, 0.3)
+        );
+        padding: 80px 30px;
+        text-align: center;
+        border-radius: 20px;
+        margin: 60px 0;
+      }
+
+      .cta-title {
+        font-family: "Pinyon Script", cursive;
+        font-size: 3rem;
+        color: #3d4a5f;
+        margin-bottom: 20px;
+      }
+
+      .cta-text {
+        font-size: 1.1rem;
+        color: #7a8f74;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #c08d98, #d4a5af);
+        color: white;
+        padding: 15px 40px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: "Cormorant SC", serif;
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(192, 141, 152, 0.3);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(192, 141, 152, 0.4);
+      }
+
+      /* ============ ANIMATIONS ============ */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* ============ RESPONSIVE ============ */
+      @media (max-width: 768px) {
+        .section {
+          min-height: auto;
+          padding: 50px 20px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+          margin-bottom: 40px;
+        }
+
+        .bride-name,
+        .groom-name {
+          font-size: clamp(2rem, 8vw, 3.5rem);
+        }
+
+        .flower-visual {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-top: 40px;
+        border-top: 1px solid rgba(240, 220, 228, 0.5);
+      }
+
+      .footer-text {
+        font-size: 1rem;
+        color: #7a8f74;
+      }
+
+      .footer-highlight {
+        color: #d4a5af;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- HERO SECTION -->
+      <section class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">The Wedding Of</div>
+          <div class="bride-name">Zuhirna Wulan Dilla</div>
+          <div class="ampersand">&amp;</div>
+          <div class="groom-name">Darul Faturohman</div>
+
+          <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-dot"></div>
+            <div class="divider-line"></div>
+          </div>
+
+          <div class="date-text">Sabtu, 11 Juli 2026</div>
+        </div>
+      </section>
+
+      <!-- COLOR PALETTE SECTION -->
+      <section class="section">
+        <h2 class="section-title">🎨 Palet Warna Baru</h2>
+        <div class="color-palette">
+          <div class="color-item">
+            <div class="color-box" style="background: #f9f5f0"></div>
+            <div class="color-name">Cream</div>
+            <div class="color-code">#f9f5f0</div>
+          </div>
+          <div class="color-item">
+            <div
+              class="color-box"
+              style="background: #ffffff; border: 1px solid #f0dce4"></div>
+            <div class="color-name">White</div>
+            <div class="color-code">#ffffff</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #f0dce4"></div>
+            <div class="color-name">Soft Pink</div>
+            <div class="color-code">#f0dce4</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #e8d0d9"></div>
+            <div class="color-name">Blush</div>
+            <div class="color-code">#e8d0d9</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #d4a5af"></div>
+            <div class="color-name">Rose</div>
+            <div class="color-code">#d4a5af</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #c08d98"></div>
+            <div class="color-name">Rose Deep</div>
+            <div class="color-code">#c08d98</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #a8bba5"></div>
+            <div class="color-name">Sage</div>
+            <div class="color-code">#a8bba5</div>
+          </div>
+          <div class="color-item">
+            <div class="color-box" style="background: #3d4a5f"></div>
+            <div class="color-name">Navy</div>
+            <div class="color-code">#3d4a5f</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FLOWERS SECTION -->
+      <section class="flowers-section">
+        <h2 class="section-title">🌸 Dekorasi Bunga Canti</h2>
+        <div class="flower-showcase">
+          <div class="flower-item">
+            <div class="flower-visual">
+              <svg viewBox="0 0 400 400" style="width: 180px; height: 180px">
+                <defs>
+                  <linearGradient
+                    id="petalGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%">
+                    <stop
+                      offset="0%"
+                      style="stop-color: #e8d0d9; stop-opacity: 0.9" />
+                    <stop
+                      offset="100%"
+                      style="stop-color: #d4a5af; stop-opacity: 0.7" />
+                  </linearGradient>
+                </defs>
+                <!-- Outer petals -->
+                <ellipse
+                  cx="200"
+                  cy="95"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(0 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="309"
+                  cy="119"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(45 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="365"
+                  cy="200"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(90 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="309"
+                  cy="281"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(135 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="200"
+                  cy="305"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(180 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="91"
+                  cy="281"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(225 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="35"
+                  cy="200"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(270 200 200)"
+                  opacity="0.85" />
+                <ellipse
+                  cx="91"
+                  cy="119"
+                  rx="40"
+                  ry="75"
+                  fill="url(#petalGrad)"
+                  transform="rotate(315 200 200)"
+                  opacity="0.85" />
+                <!-- Center -->
+                <circle
+                  cx="200"
+                  cy="200"
+                  r="40"
+                  fill="#e8d0d9"
+                  opacity="0.95" />
+                <circle
+                  cx="200"
+                  cy="200"
+                  r="26"
+                  fill="#c08d98"
+                  opacity="0.95" />
+              </svg>
+            </div>
+            <div class="flower-title">Frame Bunga</div>
+            <div class="flower-desc">
+              Bunga besar di tengah dengan 8 kelopak dan detail gradient untuk
+              menciptakan fokus visual yang indah
+            </div>
+          </div>
+
+          <div class="flower-item">
+            <div class="flower-visual">
+              <svg viewBox="0 0 300 300" style="width: 180px; height: 180px">
+                <!-- Petals -->
+                <ellipse
+                  cx="150"
+                  cy="70"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(0 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="212"
+                  cy="88"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(45 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="230"
+                  cy="150"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(90 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="212"
+                  cy="212"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(135 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="150"
+                  cy="230"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(180 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="88"
+                  cy="212"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(225 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="70"
+                  cy="150"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(270 150 150)"
+                  opacity="0.8" />
+                <ellipse
+                  cx="88"
+                  cy="88"
+                  rx="35"
+                  ry="68"
+                  fill="rgba(224, 185, 198, 0.85)"
+                  transform="rotate(315 150 150)"
+                  opacity="0.8" />
+                <!-- Center -->
+                <circle cx="150" cy="150" r="36" fill="#e0b9c6" opacity="0.9" />
+                <circle
+                  cx="150"
+                  cy="150"
+                  r="22"
+                  fill="#c08d98"
+                  opacity="0.95" />
+              </svg>
+            </div>
+            <div class="flower-title">Bunga Sudut</div>
+            <div class="flower-desc">
+              Dekorasi elegan di sudut kanan atas dan kiri bawah dengan animasi
+              circular reveal yang menawan
+            </div>
+          </div>
+
+          <div class="flower-item">
+            <div class="flower-visual">
+              <svg viewBox="0 0 200 200" style="width: 180px; height: 180px">
+                <circle cx="100" cy="100" r="60" fill="#f0dce4" opacity="0.3" />
+                <circle cx="100" cy="100" r="40" fill="#e8d0d9" opacity="0.5" />
+                <circle cx="100" cy="100" r="20" fill="#d4a5af" opacity="0.8" />
+              </svg>
+            </div>
+            <div class="flower-title">Bunga Latar Belakang</div>
+            <div class="flower-desc">
+              Dekorasi subtle di halaman pembuka yang menciptakan suasana
+              romantis sejak awal
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION -->
+      <section class="section">
+        <h2 class="section-title">✨ Fitur Unggulan</h2>
+        <div style="width: 100%; max-width: 1200px; margin: 0 auto">
+          <div class="features">
+            <div class="feature-card">
+              <div class="feature-icon">🎀</div>
+              <div class="feature-title">Desain Elegan</div>
+              <div class="feature-text">
+                Kombinasi warna cream, putih, dan soft pink yang menciptakan
+                kesan romantis dan sophisticated
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌸</div>
+              <div class="feature-title">Bunga Dekoratif</div>
+              <div class="feature-text">
+                Dekorasi bunga yang indah sebagai frame dan sudut untuk
+                mempercantik tampilan undangan
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⏱️</div>
+              <div class="feature-title">Countdown Timer</div>
+              <div class="feature-text">
+                Penghitung waktu otomatis menuju hari istimewa dengan animasi
+                yang smooth
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🎬</div>
+              <div class="feature-title">Galeri & Video</div>
+              <div class="feature-text">
+                Tampilkan foto prewedding dan video dalam galeri interaktif yang
+                indah
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">✍️</div>
+              <div class="feature-title">Form RSVP</div>
+              <div class="feature-text">
+                Formulir konfirmasi kehadiran yang terintegrasi dengan database
+                Google Sheets
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📱</div>
+              <div class="feature-title">Responsive Design</div>
+              <div class="feature-text">
+                Tampilan sempurna di desktop, tablet, dan mobile dengan loading
+                cepat
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA SECTION -->
+      <section class="cta">
+        <div class="cta-title">Siap untuk Digunakan?</div>
+        <div class="cta-text">
+          Undangan digital ini telah didesain dengan teliti untuk menciptakan
+          pengalaman yang tak terlupakan bagi tamu Anda. Customize dengan data
+          Anda dan bagikan link undangan melalui WhatsApp atau media sosial.
+        </div>
+        <a href="README.md" class="cta-button">Lihat Dokumentasi Lengkap</a>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-text">
+          Undangan Digital Estetik <span class="footer-highlight">❤️</span>
+          <br />
+          Dirancang dengan penuh kasih untuk membuat acara spesial Anda lebih
+          berkesan
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

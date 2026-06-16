@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ---- Palet & font kustom (tema cream, putih, soft pink) ---- */
+@theme {
+  --color-ivory:    #faf6f2;
+  --color-cream:    #f9f5f0;
+  --color-white:    #ffffff;
+  --color-softpink: #f0dce4;
+  --color-blush:    #e8d0d9;
+  --color-rose:     #d4a5af;
+  --color-rosedeep: #c08d98;
+  --color-mauve:    #b89193;
+  --color-sage:     #a8bba5;
+  --color-sagedeep: #7a8f74;
+  --color-navy:     #3d4a5f;
+  --color-ink:      #4a4045;
+  --font-serif:  "Cormorant Garamond", serif;
+  --font-script: "Pinyon Script", cursive;
+  --font-sc:     "Cormorant SC", serif;
+}
+
+html { scroll-behavior: smooth; }
+body { 
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-white) 50%, var(--color-softpink) 100%);
+  background-attachment: fixed;
+}
+
+/* veil terang di atas video supaya teks gelap terbaca */
+.video-veil {
+  background: linear-gradient(180deg,
+    rgba(249,245,240,.88) 0%,
+    rgba(255,255,255,.82) 40%,
+    rgba(240,220,228,.80) 70%,
+    rgba(249,245,240,.90) 100%);
+}
+.bg-drift {
+  background: linear-gradient(135deg,#f9f5f0,#ffffff,#f0dce4,#faf6f2);
+  background-size: 400% 400%;
+  animation: drift 26s ease infinite;
+}
+@keyframes drift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+@keyframes bob   { 0%,100%{transform:translate(-50%,0)} 50%{transform:translate(-50%,8px)} }
+.scroll-bob { animation: bob 2s ease-in-out infinite; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 6s linear infinite; }
+
+/* Animasi bunga yang lebih halus */
+@keyframes floatUp {
+  0% { transform: translateY(10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+.float-bloom { animation: floatUp 3s ease-in-out infinite; }
+.sway-gentle { animation: sway 4s ease-in-out infinite; }
+
+/* Efek blur pada elemen bunga untuk depth */
+.bloom-blur {
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+}
