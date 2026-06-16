@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Undangan Pernikahan — React + Vite + Tailwind + Framer Motion
 
 Undangan pernikahan digital dengan video background dan animasi bunga mekar (clip-path).
@@ -59,3 +60,6 @@ Lihat **DOKUMENTASI.md** untuk spesifikasi aset (video, foto, bunga), target uku
 - **Musik**: taruh `musik.mp3` di `public/`. Mulai pada sentuhan pertama; ada tombol on/off di pojok.
 - **RSVP ke Google Sheet**: ikuti **backend-rsvp/CARA-PASANG.md**, lalu isi `rsvpEndpoint` di `DATA`.
 # weddinginvitation
+=======
+# weddinginvitation
+>>>>>>> e3390979b3d90c04348d5e1bad250d52f236542d

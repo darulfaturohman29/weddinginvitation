@@ -2,6 +2,7 @@
 
 /* ---- Palet & font kustom (tema cream, putih, soft pink) ---- */
 @theme {
+  --color-maroon:   #660000;
   --color-ivory:    #faf6f2;
   --color-cream:    #f9f5f0;
   --color-white:    #ffffff;

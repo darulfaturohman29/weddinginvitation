@@ -114,7 +114,7 @@ function Divider() {
   );
 }
 const Eyebrow = ({ children }) => (
-  <div className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-rose mb-3">
+  <div className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-maroon mb-3">
     {children}
   </div>
 );
@@ -205,7 +205,7 @@ function Cover({ onOpen, guest, coupleName, dateText }) {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: EASE, delay: 0.2 }}>
-        <div className="font-sc tracking-[0.42em] uppercase text-[0.72rem] text-rosedeep mb-3 text-bold">
+        <div className="font-sc tracking-[0.42em] uppercase text-[0.72rem] text-maroon mb-3 text-bold">
           The Wedding Of
         </div>
         <div className="font-script text-navy leading-none text-[clamp(2.8rem,11vw,5rem)]">
@@ -215,7 +215,7 @@ function Cover({ onOpen, guest, coupleName, dateText }) {
         <p className="font-bold text-[1.05rem]">{dateText}</p>
 
         <div className="mt-9 mb-6">
-          <p className="font-sc tracking-[0.2em] uppercase text-[0.7rem] text-rosedeep text-bold">
+          <p className="font-sc tracking-[0.2em] uppercase text-[0.7rem] text-maroon text-bold">
             Kepada Yth.
           </p>
           <p className="font-serif text-[1.25rem] text-navy mt-1">{guest}</p>
@@ -771,7 +771,7 @@ export default function App() {
         <FrameFlower />
         <div className="relative z-10 py-[120px]">
           <Reveal delay={0.15}>
-            <div className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-rose mb-3 pl-2">
+            <div className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-maroon mb-3 pl-2">
               The Wedding Of
             </div>
           </Reveal>
@@ -795,7 +795,7 @@ export default function App() {
             </p>
           </Reveal>
         </div>
-        <div className="absolute bottom-7 left-1/2 scroll-bob font-sc tracking-[0.3em] text-[0.64rem] text-rose">
+        <div className="absolute bottom-7 left-1/2 scroll-bob font-sc tracking-[0.3em] text-[0.64rem] text-maroon">
           SCROLL
         </div>
       </section>
@@ -808,7 +808,7 @@ export default function App() {
             <p className="italic font-bold text-[1.12rem] max-w-[40ch] mx-auto">
               {DATA.verse}
             </p>
-            <p className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-rose mt-5">
+            <p className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-maroon mt-5">
               {DATA.verseRef}
             </p>
           </Reveal>
@@ -833,7 +833,7 @@ export default function App() {
                 <div className="font-script text-navy text-[2.6rem] leading-tight mt-5 min-h-[5rem] flex items-center justify-center">
                   {p.fullName}
                 </div>
-                <div className="font-sc tracking-[0.2em] text-rose text-[0.72rem] uppercase my-2">
+                <div className="font-sc tracking-[0.2em] text-maroon text-[0.72rem] uppercase my-2">
                   {i === 0 ? "Mempelai Wanita" : "Mempelai Pria"}
                 </div>
                 <p className="text-[1.05rem] font-bold max-w-[30ch] mx-auto min-h-[3.2rem] flex items-center justify-center">
@@ -843,7 +843,7 @@ export default function App() {
                   href={p.ig}
                   target="_blank"
                   rel="noopener"
-                  className="inline-block mt-3 font-sc tracking-[0.2em] uppercase text-[0.7rem] text-navy border border-rose/70 px-4 py-1.5 transition-all hover:bg-rose hover:text-white hover:shadow-md">
+                  className="inline-block mt-3 font-sc tracking-[0.2em] uppercase text-[0.7rem] text-maroon border border-maroon/70 px-4 py-1.5 transition-all hover:bg-maroon hover:text-white hover:shadow-md">
                   Instagram
                 </a>
               </Reveal>
@@ -865,7 +865,7 @@ export default function App() {
               <Reveal key={s.year} delay={0.1 + i * 0.15}>
                 <div className="relative pl-8 pb-10 last:pb-0">
                   <span className="absolute -left-[7px] top-1.5 h-3 w-3 rounded-full bg-rose ring-4 ring-cream" />
-                  <div className="font-sc tracking-[0.2em] text-rose text-[0.74rem] uppercase">
+                  <div className="font-sc tracking-[0.2em] text-maroon text-[0.74rem] uppercase">
                     {s.year}
                   </div>
                   <h3 className="font-sc text-navy text-[1.3rem] tracking-[0.06em] mt-1">
@@ -885,20 +885,20 @@ export default function App() {
       <section className="relative min-h-screen flex items-center justify-center text-center px-6">
         <Reveal className="relative z-10">
           <Eyebrow>Menuju Hari Bahagia</Eyebrow>
-          <div className="inline-flex border border-rose/50 bg-white/70 backdrop-blur-sm mt-1 shadow-lg">
+          <div className="inline-flex border border-maroon/50 bg-white/70 backdrop-blur-sm mt-1 shadow-lg">
             <div className="px-6 py-3.5">
               <div className="text-[2.6rem] font-medium text-navy leading-none">
                 {DATA.day}
               </div>
-              <div className="font-sc tracking-[0.2em] text-[0.72rem] text-rose mt-1.5">
+              <div className="font-sc tracking-[0.2em] text-[0.72rem] text-maroon mt-1.5">
                 {DATA.month}
               </div>
             </div>
-            <div className="px-6 py-3.5 border-l border-softpink/50">
+            <div className="px-6 py-3.5 border-l border-maroon/50">
               <div className="text-[2.6rem] font-medium text-navy leading-none">
                 {DATA.year}
               </div>
-              <div className="font-sc tracking-[0.2em] text-[0.72rem] text-rose mt-1.5">
+              <div className="font-sc tracking-[0.2em] text-[0.72rem] text-maroon mt-1.5">
                 {DATA.weekday}
               </div>
             </div>
@@ -922,7 +922,7 @@ export default function App() {
                 key={ev.title}
                 delay={0.15 + i * 0.15}
                 className="flex-1 min-w-[280px] max-w-[400px]">
-                <div className="relative border border-softpink/60 bg-white/70 backdrop-blur-sm px-7 py-9 h-full shadow-lg hover:shadow-xl transition-all">
+                <div className="relative border border-maroon/60 bg-white/70 backdrop-blur-sm px-7 py-9 h-full shadow-lg hover:shadow-xl transition-all">
                   <span className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-softpink via-rose to-blush" />
                   <h3 className="font-sc tracking-[0.16em] text-[1.4rem] text-navy mb-3">
                     {ev.title}
