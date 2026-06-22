@@ -23,7 +23,7 @@ const DATA = {
     name: "Dilla",
     fullName: "Zuhirna Wulan Dilla, S.I.Kom.",
     photo: import.meta.env.BASE_URL + "wanita.jpeg",
-    parents: "Putri ke-1 dari Bapak Irly Alex & Ibu Nurdina",
+    parents: "Putri ke-1 dari Bapak Irly Alex Martherus, S.Sos & Ibu Nurdina",
     ig: "https://instagram.com/dilla_zwd",
   },
 
@@ -38,7 +38,7 @@ const DATA = {
     {
       year: "Desember 2025",
       title: "Awal Bertemu",
-      text: "Berawal dari sebuah buku novel yang baru saja aku terbitkan. Saat itu, kamu datang untuk mengambil buku tersebut melalui COD. Tidak ada yang menyangka bahwa pertemuan sederhana itu akan menjadi awal dari cerita kita. Dari obrolan singkat tentang buku, kita mulai saling mengenal lebih jauh.",
+      text: "Semua berawal dari sebuah buku novel yang baru saja diterbitkan oleh Dilla. Tanpa diduga, Darul menghubungi Dilla dengan niat membeli novel tersebut. Setelah berbincang singkat, keduanya sepakat untuk bertemu. Pertemuan sederhana itu menjadi momen pertama Dilla dan Darul saling bertatap muka. Tidak ada yang menyangka, dari sebuah buku dan pertemuan singkat itulah kisah cinta ini dimulai.",
     },
     {
       year: "Desember 2025 - Maret 2026",
@@ -53,10 +53,10 @@ const DATA = {
     {
       year: "Juli 2026",
       title: "Pernikahan",
-      text: "Dan akhirnya, kita sampai pada hari yang selama ini kita doakan. Mengucapkan janji suci, menyatukan dua kehidupan dalam satu tujuan yang sama. Dari sebuah buku yang mempertemukan kita, kini kita menulis lembaran baru sebagai pasangan suami istri. Semoga rumah yang kita bangun selalu dipenuhi cinta, keberkahan, dan kebahagiaan hingga akhir hayat.",
+      text: "Dan akhirnya, kita sampai pada hari yang selama ini selalu kita doakan. Hari di mana kita mengucapkan janji suci, menyatukan dua kehidupan dalam satu tujuan yang sama.Berawal dari sebuah buku yang mempertemukan kita, kini kita menulis lembaran baru sebagai pasangan suami istri. Siapa sangka, dari pertemuan sederhana itu, kita akhirnya menemukan seseorang yang selama ini dicari: tempat pulang yang paling nyaman, tempat berbagi cerita, tawa, dan segala suka maupun duka. Kini, bukan lagi tentang aku atau kamu, melainkan tentang kita. Semoga rumah yang kita bangun senantiasa dipenuhi cinta, keberkahan, ketulusan, dan kebahagiaan hingga akhir hayat. Karena pada akhirnya, di antara begitu banyak kemungkinan, kita saling menemukan dan memilih untuk pulang satu sama lain.",
     },
   ],
-
+  
   gallery: [
     import.meta.env.BASE_URL + "prewedding-1.png",
     import.meta.env.BASE_URL + "prewedding-2.png",
