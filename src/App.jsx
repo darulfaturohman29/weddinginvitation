@@ -773,8 +773,6 @@ export default function App() {
 
       {/* ACARA */}
       <section className="relative min-h-screen flex items-center justify-center text-center px-6">
-        <CornerFlower corner="tr" />
-        <CornerFlower corner="bl" />
         <div className="relative z-10 w-full max-w-[760px]">
           <Reveal>
             <SectionTitle>Rangkaian Acara</SectionTitle>
