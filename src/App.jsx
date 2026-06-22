@@ -114,14 +114,9 @@ const DATA = {
   cornerLeft: import.meta.env.BASE_URL + "bunga-sudut-kiri.png",
 };
 
-// Daftar tamu: tambah baris baru untuk setiap tamu
-// Format: "ID_ACAK": "Nama Tamu"
-const GUESTS = {
-  "x7k2m9": "Budi Santoso",
-  // tambahkan tamu lain di sini, contoh:
-  // "p4n8q1": "Ahmad Fauzi",
-  // "r3t6w5": "Keluarga Besar Hasan",
-};
+// URL Apps Script Web App untuk daftar tamu dari Google Spreadsheet
+// Isi dengan URL setelah deploy Apps Script (backend-tamu/Code.gs)
+const TAMU_SCRIPT_URL = "";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -556,15 +551,25 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [musicHidden, setMusicHidden] = useState(false);
   const audioRef = useRef(null);
+  const [guest, setGuest] = useState("...");
 
-  // nama tamu dari link: ?id=x7k2m9 (dari mapping) atau ?tamu=NamaTamu (langsung)
-  const guest = (() => {
+  useEffect(() => {
     const p = new URLSearchParams(window.location.search);
+    const directName = p.get("tamu") || p.get("to");
+    if (directName) {
+      setGuest(decodeURIComponent(directName.replace(/\+/g, " ")));
+      return;
+    }
     const id = p.get("id");
-    if (id && GUESTS[id]) return GUESTS[id];
-    const t = p.get("tamu") || p.get("to");
-    return t ? decodeURIComponent(t.replace(/\+/g, " ")) : "Bapak/Ibu/Saudara/i";
-  })();
+    if (!id || !TAMU_SCRIPT_URL) {
+      setGuest("Bapak/Ibu/Saudara/i");
+      return;
+    }
+    fetch(TAMU_SCRIPT_URL)
+      .then((r) => r.json())
+      .then((data) => setGuest(data[id] || "Bapak/Ibu/Saudara/i"))
+      .catch(() => setGuest("Bapak/Ibu/Saudara/i"));
+  }, []);
 
   const playMusic = () => {
     const a = audioRef.current;
