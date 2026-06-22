@@ -114,6 +114,15 @@ const DATA = {
   cornerLeft: import.meta.env.BASE_URL + "bunga-sudut-kiri.png",
 };
 
+// Daftar tamu: tambah baris baru untuk setiap tamu
+// Format: "ID_ACAK": "Nama Tamu"
+const GUESTS = {
+  "x7k2m9": "Budi Santoso",
+  // tambahkan tamu lain di sini, contoh:
+  // "p4n8q1": "Ahmad Fauzi",
+  // "r3t6w5": "Keluarga Besar Hasan",
+};
+
 const EASE = [0.22, 1, 0.36, 1];
 
 /* ---------- helper ---------- */
@@ -548,13 +557,13 @@ export default function App() {
   const [musicHidden, setMusicHidden] = useState(false);
   const audioRef = useRef(null);
 
-  // nama tamu dari link: ?tamu=Budi  (cadangan: Bapak/Ibu/Saudara/i)
+  // nama tamu dari link: ?id=x7k2m9 (dari mapping) atau ?tamu=NamaTamu (langsung)
   const guest = (() => {
     const p = new URLSearchParams(window.location.search);
+    const id = p.get("id");
+    if (id && GUESTS[id]) return GUESTS[id];
     const t = p.get("tamu") || p.get("to");
-    return t
-      ? decodeURIComponent(t.replace(/\+/g, " "))
-      : "Bapak/Ibu/Saudara/i";
+    return t ? decodeURIComponent(t.replace(/\+/g, " ")) : "Bapak/Ibu/Saudara/i";
   })();
 
   const playMusic = () => {
@@ -715,7 +724,7 @@ export default function App() {
             <SectionTitle>Our Story</SectionTitle>
             <Divider />
           </Reveal>
-          <div className="mt-6 text-left border-l border-softpink/50 ml-3 md:ml-6">
+          <div className="mt-6 text-left border-l border-softpink/50 ml-3 md:ml-6 mb-10">
             {DATA.story.map((s, i) => (
               <Reveal key={s.year} delay={0.1 + i * 0.15}>
                 <div className="relative pl-8 pb-10 last:pb-0">
@@ -726,7 +735,7 @@ export default function App() {
                   <h3 className="font-sc text-navy text-[1.3rem] tracking-[0.06em] mt-1">
                     {s.title}
                   </h3>
-                  <p className="text-[1.05rem] font-bold text-ink mt-1.5">
+                  <p className="text-[1.05rem] font-bold text-ink mt-1.5 mb-5">
                     {s.text}
                   </p>
                 </div>
