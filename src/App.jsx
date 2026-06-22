@@ -15,16 +15,16 @@ const DATA = {
   groom: {
     name: "Darul",
     fullName: "Darul Faturohman, S.T.",
-    photo: import.meta.env.BASE_URL + "pria.jpg",
+    photo: import.meta.env.BASE_URL + "pria.jpeg",
     parents: "Putra ke-4 dari Bapak H. Mamad S & Ibu Hj. Oon",
-    ig: "https://instagram.com/",
+    ig: "https://instagram.com/roelan29",
   },
   bride: {
     name: "Dilla",
     fullName: "Zuhirna Wulan Dilla, S.I.Kom.",
-    photo: import.meta.env.BASE_URL + "wanita.jpg",
+    photo: import.meta.env.BASE_URL + "wanita.jpeg",
     parents: "Putri ke-1 dari Bapak Irly Alex & Ibu Nurdina",
-    ig: "https://instagram.com/",
+    ig: "https://instagram.com/dilla_zwd",
   },
 
   verse:
@@ -38,7 +38,7 @@ const DATA = {
     {
       year: "Desember 2025",
       title: "Awal Bertemu",
-      text: "npm run devBerawal dari sebuah buku novel yang baru saja aku terbitkan. Saat itu, kamu datang untuk mengambil buku tersebut melalui COD. Tidak ada yang menyangka bahwa pertemuan sederhana itu akan menjadi awal dari cerita kita. Dari obrolan singkat tentang buku, kita mulai saling mengenal lebih jauh.",
+      text: "Berawal dari sebuah buku novel yang baru saja aku terbitkan. Saat itu, kamu datang untuk mengambil buku tersebut melalui COD. Tidak ada yang menyangka bahwa pertemuan sederhana itu akan menjadi awal dari cerita kita. Dari obrolan singkat tentang buku, kita mulai saling mengenal lebih jauh.",
     },
     {
       year: "Desember 2025 - Maret 2026",
@@ -102,9 +102,9 @@ const DATA = {
     },
     {
       label: "Mempelai Wanita",
-      name: "Sdri ZUHIRNA WULAN DILLA",
-      bank: "BNI",
-      norek: "1917831461",
+      name: "ZUHIRNA WULAN DILLA",
+      bank: "Mandiri",
+      norek: "1660005544572",
     },
   ],
 
@@ -440,84 +440,6 @@ function FrameFlower() {
   );
 }
 
-function CornerFlower({ corner }) {
-  const tr = corner === "tr";
-  return (
-    <motion.svg
-      viewBox="0 0 300 300"
-      className={`absolute ${
-        tr ? "top-0 right-0" : "bottom-0 left-0"
-      } w-[min(260px,45vw)] h-auto pointer-events-none z-0`}
-      style={{ transform: tr ? "none" : "scaleX(-1)" }}
-      initial={{
-        clipPath: tr ? "circle(0% at 88% 12%)" : "circle(0% at 12% 88%)",
-        opacity: 0,
-      }}
-      whileInView={{
-        clipPath: tr ? "circle(165% at 88% 12%)" : "circle(165% at 12% 88%)",
-        opacity: 1,
-      }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 2, ease: EASE }}>
-      {/* Main petals (8) dengan gradient */}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
-        const rad = (angle * Math.PI) / 180;
-        const x = 150 + 92 * Math.cos(rad);
-        const y = 150 + 92 * Math.sin(rad);
-        return (
-          <ellipse
-            key={angle}
-            cx={x}
-            cy={y}
-            rx="35"
-            ry="68"
-            fill="rgba(224, 185, 198, 0.85)"
-            transform={`rotate(${angle + 90} ${x} ${y})`}
-            opacity="0.8"
-          />
-        );
-      })}
-      {/* Secondary petals untuk detail lebih */}
-      {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((angle) => {
-        const rad = (angle * Math.PI) / 180;
-        const x = 150 + 65 * Math.cos(rad);
-        const y = 150 + 65 * Math.sin(rad);
-        return (
-          <ellipse
-            key={`sec-${angle}`}
-            cx={x}
-            cy={y}
-            rx="28"
-            ry="52"
-            fill="rgba(212, 165, 175, 0.7)"
-            transform={`rotate(${angle + 90} ${x} ${y})`}
-          />
-        );
-      })}
-      {/* Leaves */}
-      {[45, 315].map((angle) => {
-        const rad = (angle * Math.PI) / 180;
-        const x = 150 + 140 * Math.cos(rad);
-        const y = 150 + 140 * Math.sin(rad);
-        return (
-          <ellipse
-            key={`leaf-${angle}`}
-            cx={x}
-            cy={y}
-            rx="20"
-            ry="52"
-            fill="rgba(168, 187, 165, 0.65)"
-            transform={`rotate(${angle + 50} ${x} ${y})`}
-          />
-        );
-      })}
-      {/* Center dengan detail */}
-      <circle cx="150" cy="150" r="36" fill="rgba(224, 185, 198, 0.9)" />
-      <circle cx="150" cy="150" r="22" fill="rgba(192, 141, 152, 0.95)" />
-      <circle cx="150" cy="150" r="10" fill="rgba(168, 187, 165, 0.8)" />
-    </motion.svg>
-  );
-}
 function Gallery({ photos }) {
   const [idx, setIdx] = useState(null);
   const [hidden, setHidden] = useState({});
@@ -702,7 +624,6 @@ export default function App() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <FrameFlower />
         <div className="relative z-10 py-[120px]">
           <Reveal delay={0.15}>
             <div className="font-sc tracking-[0.42em] uppercase text-[0.78rem] text-maroon mb-3 pl-2">
@@ -768,7 +689,7 @@ export default function App() {
                   {p.fullName}
                 </div>
                 <div className="font-sc tracking-[0.2em] text-maroon text-[0.72rem] uppercase my-2">
-                  {i === 0 ? "Mempelai Wanita" : "Mempelai Pria"}
+                  {i === 0 ? "Mempelai pria" : "Mempelai wanita"}
                 </div>
                 <p className="text-[1.05rem] font-bold max-w-[30ch] mx-auto min-h-[3.2rem] flex items-center justify-center">
                   {p.parents}
