@@ -31,6 +31,9 @@ const DATA = {
     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya.",
   verseRef: "QS. Ar-Rum : 21",
 
+  verse2:
+    '"Semesta tidak membuat kita terlambat, ia hanya sedang memastikan kita berhenti pada orang yang tepat."',
+
   story: [
     {
       year: "Desember 2025",
@@ -51,10 +54,6 @@ const DATA = {
       year: "Juli 2026",
       title: "Pernikahan",
       text: "Dan akhirnya, kita sampai pada hari yang selama ini kita doakan. Mengucapkan janji suci, menyatukan dua kehidupan dalam satu tujuan yang sama. Dari sebuah buku yang mempertemukan kita, kini kita menulis lembaran baru sebagai pasangan suami istri. Semoga rumah yang kita bangun selalu dipenuhi cinta, keberkahan, dan kebahagiaan hingga akhir hayat.",
-    },
-    {
-      title:
-        "Semesta tidak membuat kita terlambat, ia hanya sedang memastikan kita berhenti pada orang yang tepat.",
     },
   ],
 
@@ -96,16 +95,16 @@ const DATA = {
 
   bankAccounts: [
     {
-      name: DATA.bride.fullName,
-      bank: "BCA",
-      norek: "1234567890",
-      atas_nama: "Zuhirna Wulan Dilla",
+      label: "Mempelai Pria",
+      name: "DARUL FATUROHMAN",
+      bank: "BNI",
+      norek: "1936817035",
     },
     {
-      name: DATA.groom.fullName,
-      bank: "Mandiri",
-      norek: "9876543210",
-      atas_nama: "Darul Faturohman",
+      label: "Mempelai Wanita",
+      name: "Sdri ZUHIRNA WULAN DILLA",
+      bank: "BNI",
+      norek: "1917831461",
     },
   ],
 
@@ -185,47 +184,6 @@ function Cover({ onOpen, guest, coupleName, dateText }) {
       transition={{ duration: 0.95, ease: EASE }}>
       <div className="absolute inset-0 video-veil" />
 
-      {/* Dekorasi bunga latar belakang pada cover */}
-      <svg
-        viewBox="0 0 400 400"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(500px,90vw)] opacity-60 pointer-events-none"
-        style={{ height: "auto" }}>
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
-          const rad = (angle * Math.PI) / 180;
-          const x = 200 + 105 * Math.cos(rad);
-          const y = 200 + 105 * Math.sin(rad);
-          return (
-            <ellipse
-              key={angle}
-              cx={x}
-              cy={y}
-              rx="36"
-              ry="70"
-              fill="rgba(240, 220, 228, 0.7)"
-              transform={`rotate(${angle + 90} ${x} ${y})`}
-            />
-          );
-        })}
-        {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((angle) => {
-          const rad = (angle * Math.PI) / 180;
-          const x = 200 + 70 * Math.cos(rad);
-          const y = 200 + 70 * Math.sin(rad);
-          return (
-            <ellipse
-              key={`mid-${angle}`}
-              cx={x}
-              cy={y}
-              rx="30"
-              ry="56"
-              fill="rgba(224, 185, 198, 0.6)"
-              transform={`rotate(${angle + 90} ${x} ${y})`}
-            />
-          );
-        })}
-        <circle cx="200" cy="200" r="34" fill="rgba(232, 208, 217, 0.8)" />
-        <circle cx="200" cy="200" r="20" fill="rgba(192, 141, 152, 0.85)" />
-      </svg>
-
       <motion.div
         className="relative z-10"
         initial={{ opacity: 0, y: 24 }}
@@ -273,6 +231,7 @@ function CongratulationsForm() {
   const [form, setForm] = useState({ nama: "", ucapan: "" });
   const [greetings, setGreetings] = useState([]);
   const [status, setStatus] = useState("idle");
+  const scrollContainerRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -285,6 +244,14 @@ function CongratulationsForm() {
     setStatus("success");
     setTimeout(() => setStatus("idle"), 2000);
   };
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      setTimeout(() => {
+        scrollContainerRef.current.scrollTop = 0;
+      }, 0);
+    }
+  }, [greetings]);
 
   return (
     <div className="w-full">
@@ -331,19 +298,23 @@ function CongratulationsForm() {
           <h4 className="font-sc tracking-[0.2em] uppercase text-[0.78rem] text-maroon mb-4 text-center">
             Ucapan Selamat dari Tamu
           </h4>
-          <div className="space-y-3">
-            {greetings.map((g) => (
-              <motion.div
-                key={g.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="border border-softpink/50 bg-white/60 backdrop-blur-sm px-5 py-4 rounded">
-                <p className="font-bold text-navy text-[1rem]">{g.nama}</p>
-                <p className="text-[1.05rem] font-semibold text-ink mt-2 italic">
-                  "{g.ucapan}"
-                </p>
-              </motion.div>
-            ))}
+          <div
+            ref={scrollContainerRef}
+            className="max-h-[500px] overflow-auto border border-softpink/30 bg-white/40 backdrop-blur-sm rounded-lg p-4">
+            <div className="space-y-3">
+              {[...greetings].reverse().map((g) => (
+                <motion.div
+                  key={g.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="border border-softpink/50 bg-white/60 backdrop-blur-sm px-5 py-4 rounded">
+                  <p className="font-bold text-navy text-[1rem]">{g.nama}</p>
+                  <p className="text-[1.05rem] font-semibold text-ink mt-2 italic">
+                    "{g.ucapan}"
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -648,7 +619,7 @@ function Gallery({ photos }) {
 
 /* ============================================================ */
 export default function App() {
-  const coupleName = `${DATA.bride.name} & ${DATA.groom.name}`;
+  const coupleName = `${DATA.groom.name} & ${DATA.bride.name}`;
 
   const [opened, setOpened] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -721,7 +692,7 @@ export default function App() {
           muted
           loop
           playsInline
-          className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+          className="absolute inset-0 w-full h-full object-contain md:object-cover"
           onError={(e) => (e.currentTarget.style.display = "none")}>
           <source src={DATA.video} type="video/mp4" />
         </video>
@@ -740,13 +711,13 @@ export default function App() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="font-script text-navy leading-none text-[clamp(3.2rem,12vw,5.8rem)]">
-              {DATA.bride.name}
+              {DATA.groom.name}
             </div>
             <span className="font-script text-navy block text-[clamp(2rem,7vw,3rem)] my-1">
               &amp;
             </span>
             <div className="font-script text-navy leading-none text-[clamp(3.2rem,12vw,5.8rem)]">
-              {DATA.groom.name}
+              {DATA.bride.name}
             </div>
           </Reveal>
           <Reveal delay={0.45}>
@@ -758,9 +729,9 @@ export default function App() {
             </p>
           </Reveal>
         </div>
-        <div className="absolute bottom-7 left-1/2 scroll-bob font-sc tracking-[0.3em] text-[0.64rem] text-maroon">
+        {/* <div className="absolute bottom-7 left-1/2 scroll-bob font-sc tracking-[0.3em] text-[0.64rem] text-maroon">
           SCROLL
-        </div>
+        </div> */}
       </section>
 
       {/* AYAT */}
@@ -787,7 +758,7 @@ export default function App() {
             <Divider />
           </Reveal>
           <div className="flex flex-wrap justify-center gap-12 mt-4">
-            {[DATA.bride, DATA.groom].map((p, i) => (
+            {[DATA.groom, DATA.bride].map((p, i) => (
               <Reveal
                 key={p.fullName}
                 delay={0.15 + i * 0.2}
@@ -840,6 +811,15 @@ export default function App() {
                 </div>
               </Reveal>
             ))}
+          </div>
+          <div className="relative z-10 max-w-[760px] mt-50">
+            <Reveal>
+              <Divider />
+              <p className="italic font-bold text-[1.12rem] max-w-[40ch] mx-auto">
+                {DATA.verse2}
+              </p>
+              <Divider />
+            </Reveal>
           </div>
         </div>
       </section>
@@ -952,12 +932,10 @@ export default function App() {
                   className="border border-maroon/60 bg-white/70 backdrop-blur-sm px-6 py-7 shadow-lg hover:shadow-xl transition-all">
                   <span className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-softpink via-rose to-blush" />
                   <p className="font-sc tracking-[0.2em] uppercase text-[0.7rem] text-rose mb-2">
-                    {acc.name === DATA.bride.fullName
-                      ? "Mempelai Wanita"
-                      : "Mempelai Pria"}
+                    {acc.label}
                   </p>
                   <p className="font-bold text-[1.2rem] text-navy mb-4">
-                    {acc.atas_nama}
+                    {acc.name}
                   </p>
                   <div className="bg-navy/5 px-4 py-3 rounded mb-3">
                     <p className="font-sc tracking-[0.1em] text-[0.75rem] text-navy mb-1">
