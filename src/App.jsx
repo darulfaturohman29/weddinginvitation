@@ -21,7 +21,7 @@ const DATA = {
   },
   bride: {
     name: "Dilla",
-    fullName: "Zuhirna Wulan Dilla, S.I.Kom.",
+    fullName: "Zuhirna Wulan Dilla, S.IKom.",
     photo: import.meta.env.BASE_URL + "wanita.jpeg",
     parents: "Putri ke-1 dari Bapak Irly Alex Martherus, S.Sos & Ibu Nurdina",
     ig: "https://instagram.com/dilla_zwd",
