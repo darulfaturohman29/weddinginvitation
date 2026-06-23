@@ -561,14 +561,23 @@ export default function App() {
       return;
     }
     const id = p.get("id");
+    console.log("[undangan] TAMU_SCRIPT_URL:", TAMU_SCRIPT_URL);
+    console.log("[undangan] id dari URL:", id);
     if (!id || !TAMU_SCRIPT_URL) {
       setGuest("Bapak/Ibu/Saudara/i");
       return;
     }
     fetch(TAMU_SCRIPT_URL)
       .then((r) => r.json())
-      .then((data) => setGuest(data[id] || "Bapak/Ibu/Saudara/i"))
-      .catch(() => setGuest("Bapak/Ibu/Saudara/i"));
+      .then((data) => {
+        console.log("[undangan] data dari spreadsheet:", data);
+        console.log("[undangan] nama untuk id", id, ":", data[id]);
+        setGuest(data[id] || "Bapak/Ibu/Saudara/i");
+      })
+      .catch((err) => {
+        console.error("[undangan] fetch error:", err);
+        setGuest("Bapak/Ibu/Saudara/i");
+      });
   }, []);
 
   const playMusic = () => {
