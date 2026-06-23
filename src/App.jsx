@@ -116,7 +116,7 @@ const DATA = {
 
 // URL Apps Script Web App untuk daftar tamu dari Google Spreadsheet
 // Isi dengan URL setelah deploy Apps Script (backend-tamu/Code.gs)
-const TAMU_SCRIPT_URL = "";
+const TAMU_SCRIPT_URL = import.meta.env.VITE_TAMU_SCRIPT_URL ?? "";
 
 const EASE = [0.22, 1, 0.36, 1];
 
