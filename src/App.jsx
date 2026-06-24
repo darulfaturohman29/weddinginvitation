@@ -117,6 +117,7 @@ const DATA = {
 // URL Apps Script Web App untuk daftar tamu dari Google Spreadsheet
 // Isi dengan URL setelah deploy Apps Script (backend-tamu/Code.gs)
 const TAMU_SCRIPT_URL = import.meta.env.VITE_TAMU_SCRIPT_URL ?? "";
+const UCAPAN_SCRIPT_URL = import.meta.env.VITE_UCAPAN_SCRIPT_URL ?? "";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -234,19 +235,41 @@ function Cover({ onOpen, guest, coupleName, dateText }) {
 function CongratulationsForm() {
   const [form, setForm] = useState({ nama: "", ucapan: "" });
   const [greetings, setGreetings] = useState([]);
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // idle | validasi | loading | success
   const scrollContainerRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  // Ambil ucapan yang sudah tersimpan saat halaman dibuka
+  useEffect(() => {
+    if (!UCAPAN_SCRIPT_URL) return;
+    fetch(UCAPAN_SCRIPT_URL)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) setGreetings([...data].reverse());
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.nama.trim() || !form.ucapan.trim()) {
       setStatus("validasi");
       return;
     }
-    setGreetings([...greetings, { ...form, id: Date.now() }]);
+
+    const newEntry = { nama: form.nama, ucapan: form.ucapan, id: Date.now() };
+    setGreetings((prev) => [newEntry, ...prev]);
     setForm({ nama: "", ucapan: "" });
+    setStatus("loading");
+
+    if (UCAPAN_SCRIPT_URL) {
+      try {
+        const url = `${UCAPAN_SCRIPT_URL}?action=save&nama=${encodeURIComponent(newEntry.nama)}&ucapan=${encodeURIComponent(newEntry.ucapan)}`;
+        await fetch(url);
+      } catch {}
+    }
+
     setStatus("success");
-    setTimeout(() => setStatus("idle"), 2000);
+    setTimeout(() => setStatus("idle"), 2500);
   };
 
   useEffect(() => {
@@ -292,8 +315,13 @@ function CongratulationsForm() {
 
         <button
           type="submit"
-          className="w-full mt-5 font-sc tracking-[0.2em] uppercase text-[0.78rem] text-white bg-rosedeep py-3 transition-all hover:opacity-90 hover:shadow-md">
-          {status === "success" ? "✓ Terima kasih!" : "Kirim Ucapan"}
+          disabled={status === "loading"}
+          className="w-full mt-5 font-sc tracking-[0.2em] uppercase text-[0.78rem] text-white bg-rosedeep py-3 transition-all hover:opacity-90 hover:shadow-md disabled:opacity-60">
+          {status === "loading"
+            ? "Mengirim..."
+            : status === "success"
+            ? "✓ Terima kasih!"
+            : "Kirim Ucapan"}
         </button>
       </form>
 
@@ -306,7 +334,7 @@ function CongratulationsForm() {
             ref={scrollContainerRef}
             className="max-h-[500px] overflow-auto border border-softpink/30 bg-white/40 backdrop-blur-sm rounded-lg p-4">
             <div className="space-y-3">
-              {[...greetings].reverse().map((g) => (
+              {greetings.map((g) => (
                 <motion.div
                   key={g.id}
                   initial={{ opacity: 0, y: 10 }}
